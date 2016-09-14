@@ -88,6 +88,7 @@ openvpn:
       ca: /path/to/mycacert.pem
       cert: /path/to/mycert.pem
       key: /path/to/mykey.pem
+      redirect_gateway: autolocal
     myclient2:
       client:
       dev: tun

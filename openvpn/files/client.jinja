@@ -81,6 +81,10 @@ http-proxy {{ config.http_proxy }}
 mute-replay-warnings
 {%- endif %}
 
+{%- if config.redirect_gateway is defined %}
+redirect-gateway {{ config.redirect_gateway }}
+{%- endif %}
+
 {%- if config.ca_content is defined %}
 <ca>
 {{ config.ca_content }}
