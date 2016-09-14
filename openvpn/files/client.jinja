@@ -48,13 +48,13 @@ nobind
 {%- if config.user is defined %}
 user {{ config.user }}
 {%- else %}
-user {{ user }}
+;user {{ user }}
 {%- endif %}
 
 {%- if config.group is defined %}
 group {{ config.group }}
 {%- else %}
-group {{ group }}
+;group {{ group }}
 {%- endif %}
 
 {%- if config.persist_key is defined and config.persist_key == False %}
