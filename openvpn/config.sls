@@ -4,6 +4,13 @@ include:
     - openvpn
 
 {% for type, names in salt['pillar.get']('openvpn', {}).iteritems() %}
+
+{% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
+/etc/pam.d/openvpn:
+  file.managed:
+    - source: salt://openvpn/files/openvpn.pam
+{% endif %}
+
 {% if type == 'server' or type == 'client' %}
 {% for name, config in names.iteritems() %}
 # Deploy {{ type }} {{ name }} config files

@@ -85,6 +85,10 @@ mute-replay-warnings
 redirect-gateway {{ config.redirect_gateway }}
 {%- endif %}
 
+{%- if config.pam_auth is defined and config.pam_auth == True %}
+auth-user-pass
+{%- endif %}
+
 {%- if config.ca_content is defined %}
 <ca>
 {{ config.ca_content }}

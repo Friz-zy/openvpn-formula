@@ -6,6 +6,7 @@
         'dh_files': ['1024', '2048'],
         'user': 'nobody',
         'group': 'nogroup',
+        'pam_module': '/usr/lib/openvpn/openvpn-plugin-auth-pam.so',
     },
     'Ubuntu': {
         'pkgs': ['openvpn'],
@@ -14,6 +15,7 @@
         'dh_files': ['1024', '2048'],
         'user': 'nobody',
         'group': 'nogroup',
+        'pam_module': '/usr/lib/openvpn/openvpn-plugin-auth-pam.so',
     },
     'Amazon': {
         'pkgs': ['openvpn'],
@@ -22,6 +24,7 @@
         'dh_files': ['1024', '2048'],
         'user': 'nobody',
         'group': 'nobody',
+        'pam_module': '/usr/lib/openvpn/openvpn-plugin-auth-pam.so',
     },
 
 }, grain='os', merge=salt['pillar.get']('openvpn:lookup')) %}
