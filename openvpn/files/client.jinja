@@ -81,19 +81,31 @@ http-proxy {{ config.http_proxy }}
 mute-replay-warnings
 {%- endif %}
 
-{%- if config.ca is defined %}
+{%- if config.ca_content is defined %}
+<ca>
+{{ config.ca_content }}
+</ca>
+{%- elif config.ca is defined %}
 ca {{ config.ca }}
 {%- else %}
 # ca is not set !
 {%- endif %}
 
-{%- if config.cert is defined %}
+{%- elif config.cert_content is defined %}
+<cert>
+{{ config.cert_content }}
+</cert>
+{%- elif config.cert is defined %}
 cert {{ config.cert }}
 {%- else %}
 # cert is not set !
 {%- endif %}
 
-{%- if config.key is defined %}
+{%- if config.key_content is defined %}
+<key>
+{{ config.key_content }}
+</key>
+{%- elif config.key is defined %}
 key {{ config.key }}
 {%- else %}
 # key is not set !
