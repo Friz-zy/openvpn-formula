@@ -12,7 +12,7 @@ include:
 {% if config.plugins is defined %}
 {% do config['plugins'].append(map.pam_module + ' openvpn') %}
 {% else %}
-{% do config['plugins'] = [map.pam_module + ' openvpn'] %}
+{% do config.update({'plugins': [map.pam_module + ' openvpn']}) %}
 {% endif %}
 {% endif %}
 
