@@ -27,6 +27,22 @@ openvpn_config_{{ type }}_{{ name }}:
     - watch_in:
       - service: openvpn_service
 
+# Enable iptables postrouting
+# more options: https://arashmilani.com/post?id=53
+{%- if config.server_bridge is not defined %}
+openvpn_iptables_postrouting:
+  iptables.append:
+    - table: nat
+    - chain: POSTROUTING
+    - jump: MASQUERADE
+    - out-interface: eth0
+{%- if config.server is defined %}
+    - source: {{ config.server.split()[0] }}/24
+{%- else %}
+    - source: 10.8.0.0/24
+{%- endif %}
+{%- endif %}
+
 {% if config.ca is defined and config.ca_content is defined %}
 # Deploy {{ type }} {{ name }} CA file
 openvpn_config_{{ type }}_{{ name }}_ca_file:

@@ -23,22 +23,6 @@ net.ipv4.ip_forward:
   sysctl.present:
     - value: 1
 
-# Enable iptables postrouting
-# more options: https://arashmilani.com/post?id=53
-{%- if config.server_bridge is not defined %}
-openvpn_iptables_postrouting:
-  iptables.append:
-    - table: nat
-    - chain: POSTROUTING
-    - jump: MASQUERADE
-    - out-interface: eth0
-{%- if config.server is defined %}
-    - source: {{ config.server.split()[0] }}/24
-{%- else %}
-    - source: 10.8.0.0/24
-{%- endif %}
-{%- endif %}
-
 # Ensure openvpn service is running and autostart is enabled
 openvpn_service:
   service.running:
