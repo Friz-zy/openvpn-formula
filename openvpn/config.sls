@@ -67,9 +67,7 @@ openvpn_config_{{ type }}_{{ name }}_key_file:
     - name: {{ config.key }}
     - contents_pillar: openvpn:{{ type }}:{{ name }}:key_content
     - makedirs: True
-    - mode: 600
-    - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
-    - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %} 
+    - mode: 600 
     - watch_in:
       - service: openvpn_service
 {% endif %}
@@ -81,9 +79,7 @@ openvpn_config_{{ type }}_{{ name }}_tls_auth_file:
     - name: {{ config.tls_auth.split()[0] }}
     - contents_pillar: openvpn:{{ type }}:{{ name }}:ta_content
     - makedirs: True
-    - mode: 600
-    - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
-    - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %} 
+    - mode: 600 
     - watch_in:
       - service: openvpn_service
 {% endif %}
@@ -94,8 +90,6 @@ openvpn_{{ type }}_{{ name }}_status_file:
   file.managed:
     - name: {{ config.status }}
     - makedirs: True
-    - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
-    - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %}
 {% endif %}
 
 {% if config.log is defined %}
@@ -104,8 +98,6 @@ openvpn_{{ type }}_{{ name }}_log_file:
   file.managed:
     - name: {{ config.log }}
     - makedirs: True
-    - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
-    - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %}
 {% endif %}
 
 {% if config.log_append is defined %}
@@ -114,8 +106,6 @@ openvpn_{{ type }}_{{ name }}_log_file_append:
   file.managed:
     - name: {{ config.log_append }}
     - makedirs: True
-    - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
-    - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %}
 {% endif %}
 
 {% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
