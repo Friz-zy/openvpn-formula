@@ -99,7 +99,7 @@ ca {{ config.ca }}
 # ca is not set !
 {%- endif %}
 
-{%- elif config.cert_content is defined %}
+{%- if config.cert_content is defined %}
 <cert>
 {{ config.cert_content }}
 </cert>
