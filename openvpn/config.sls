@@ -5,14 +5,9 @@ include:
 
 {% for type, names in salt['pillar.get']('openvpn', {}).iteritems() %}
 
-{% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
-/etc/pam.d/openvpn:
-  file.managed:
-    - source: salt://openvpn/files/openvpn.pam
-{% endif %}
-
 {% if type == 'server' or type == 'client' %}
 {% for name, config in names.iteritems() %}
+
 # Deploy {{ type }} {{ name }} config files
 openvpn_config_{{ type }}_{{ name }}:
   file.managed:
@@ -121,6 +116,12 @@ openvpn_{{ type }}_{{ name }}_log_file_append:
     - makedirs: True
     - user: {% if config.user is defined %}{{ config.user }}{% else %}{{ map.user }}{% endif %}
     - group: {% if config.group is defined %}{{ config.group }}{% else %}{{ map.group }}{% endif %}
+{% endif %}
+
+{% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
+/etc/pam.d/openvpn:
+  file.managed:
+    - source: salt://openvpn/files/openvpn.pam
 {% endif %}
 
 {% if config.client_config_dir is defined %}
