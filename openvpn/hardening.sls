@@ -9,7 +9,7 @@ extend:
 {% for name, config in names.iteritems() %}
 {# hardening #}
 {% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
-{% do config.update({'plugins': map.pam_module + ' openvpn'}) %}
+{% do config['plugins'].append(map.pam_module + ' openvpn') %}
 {% endif %}
 {% do config.update({'cipher': 'AES-256-CBC-HMAC-SHA1'}) %}
 {% do config.update({'tls-cipher': 'TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384'}) %}

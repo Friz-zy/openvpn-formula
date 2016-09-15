@@ -8,6 +8,10 @@ include:
 {% if type == 'server' or type == 'client' %}
 {% for name, config in names.iteritems() %}
 
+{% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
+{% do config['plugins'].append(map.pam_module + ' openvpn') %}
+{% endif %}
+
 # Deploy {{ type }} {{ name }} config files
 openvpn_config_{{ type }}_{{ name }}:
   file.managed:
