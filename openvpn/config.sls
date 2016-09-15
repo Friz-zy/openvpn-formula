@@ -25,7 +25,7 @@ openvpn_config_{{ type }}_{{ name }}:
 # Enable iptables postrouting
 # more options: https://arashmilani.com/post?id=53
 {%- if config.server_bridge is not defined %}
-openvpn_iptables_postrouting:
+openvpn_iptables_postrouting_{{ type }}_{{ name }}:
   iptables.append:
     - table: nat
     - chain: POSTROUTING
@@ -119,8 +119,9 @@ openvpn_{{ type }}_{{ name }}_log_file_append:
 {% endif %}
 
 {% if type == 'server' and config.pam_auth is defined and config.pam_auth == True %}
-/etc/pam.d/openvpn:
+pam_server_{{ name }}:
   file.managed:
+    - name: /etc/pam.d/openvpn
     - source: salt://openvpn/files/openvpn.pam
 {% endif %}
 
