@@ -92,7 +92,7 @@ auth-user-pass
 {%- if config.ca_content is defined %}
 <ca>
 {% for line in config.ca_content.splitlines() %}
-{{ line }}
+{{ line }}1
 {% endfor %}
 </ca>
 {%- elif config.ca is defined %}
