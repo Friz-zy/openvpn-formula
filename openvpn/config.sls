@@ -19,7 +19,11 @@ include:
 # Deploy {{ type }} {{ name }} config files
 openvpn_config_{{ type }}_{{ name }}:
   file.managed:
+    {%- if type == 'server' %}
     - name: {{ map.conf_dir }}/{{name}}.conf
+    {%- elif type == 'client' %}
+    - name: {{ map.conf_dir }}/{{name}}.ovpn
+    {%- endif %}
     - source: salt://openvpn/files/{{ type }}.jinja
     - template: jinja
     - context:
