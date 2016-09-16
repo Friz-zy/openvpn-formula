@@ -26,5 +26,14 @@
         'group': 'nobody',
         'pam_module': '/usr/lib/openvpn/openvpn-plugin-auth-pam.so',
     },
+    'RedHat': {
+        'pkgs': ['openvpn'],
+        'service': 'openvpn',
+        'conf_dir': '/etc/openvpn',
+        'dh_files': ['1024', '2048'],
+        'user': 'nobody',
+        'group': 'nobody',
+        'pam_module': '/usr/lib/openvpn/openvpn-plugin-auth-pam.so',
+    },
 
 }, grain='os', merge=salt['pillar.get']('openvpn:lookup')) %}
