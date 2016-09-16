@@ -91,10 +91,9 @@ auth-user-pass
 
 {%- if config.ca_content is defined %}
 <ca>
-{%- set ca = config.ca_content.split('\n') %}
-{%- for line in ca %}
+{% for line in config.ca_content.splitlines() %}
 {{ line }}1
-{%- endfor %}
+{% endfor %}
 </ca>
 {%- elif config.ca is defined %}
 ca {{ config.ca }}
