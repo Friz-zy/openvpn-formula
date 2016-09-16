@@ -91,7 +91,9 @@ auth-user-pass
 
 {%- if config.ca_content is defined %}
 <ca>
-{{ config.ca_content | indent(8) }}
+{% for line in config.ca_content.splitlines() %}
+{{ line }}
+{% endfor %}
 </ca>
 {%- elif config.ca is defined %}
 ca {{ config.ca }}
@@ -101,7 +103,9 @@ ca {{ config.ca }}
 
 {%- if config.cert_content is defined %}
 <cert>
-{{ config.cert_content | indent(8) }}
+{% for line in config.cert_content.splitlines() %}
+{{ line }}
+{% endfor %}
 </cert>
 {%- elif config.cert is defined %}
 cert {{ config.cert }}
@@ -111,7 +115,9 @@ cert {{ config.cert }}
 
 {%- if config.key_content is defined %}
 <key>
-{{ config.key_content | indent(8) }}
+{% for line in config.key_content.splitlines() %}
+{{ line }}
+{% endfor %}
 </key>
 {%- elif config.key is defined %}
 key {{ config.key }}
